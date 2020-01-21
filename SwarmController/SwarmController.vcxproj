@@ -133,10 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="SettingsEditor.cpp" />
     <ClCompile Include="SwarmNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="SettingsEditor.h" />
     <ClInclude Include="SwarmNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

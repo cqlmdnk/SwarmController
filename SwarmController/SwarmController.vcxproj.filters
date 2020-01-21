@@ -20,12 +20,18 @@
     <ClCompile Include="SwarmNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SettingsEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SwarmNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
