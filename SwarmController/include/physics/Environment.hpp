@@ -9,7 +9,6 @@
 #include "common/CommonStructs.hpp"
 #include "common/EarthUtils.hpp"
 
-
 namespace msr { namespace airlib {
 
 class Environment : public UpdatableObject {

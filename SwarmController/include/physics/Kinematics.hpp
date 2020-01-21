@@ -8,7 +8,6 @@
 #include "common/UpdatableObject.hpp"
 #include "common/CommonStructs.hpp"
 
-
 namespace msr { namespace airlib {
 
 class Kinematics : public UpdatableObject {
