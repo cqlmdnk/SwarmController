@@ -36,11 +36,28 @@ void mFrame::AddBtnOnButtonClicked(wxCommandEvent &evt) {
 }
 
 void mFrame::StartBtnOnButtonClicked(wxCommandEvent &evt) { //set path to unreal build and start with system()
-	string path = "\"C:\\Users\\dell\\Documents\\Unreal Projects\\Swarm\\Saved\\StagedBuilds\\WindowsNoEditor\\Swarm.exe\"";
-	int result = system(path.c_str());
+	Close(); // close editor gui
+	// path to unreal simulation executable
+	wchar_t path[] = L"\"C:\\Users\\dell\\Documents\\Unreal Projects\\Swarm\\Saved\\StagedBuilds\\WindowsNoEditor\\Swarm.exe\"";
 
+	STARTUPINFOW process_startup_info{ 0 };
+	process_startup_info.cb = sizeof(process_startup_info); // setup size of strcture in bytes
 
+	PROCESS_INFORMATION process_info{ 0 };
 
+	
+
+	if (CreateProcessW(NULL, path, NULL, NULL, TRUE, 0, NULL, NULL, &process_startup_info, &process_info)) // start unreal  simulation
+	{
+		CloseHandle(process_info.hProcess);
+		CloseHandle(process_info.hThread);
+	}
+
+	 
 	//start controller
 	//call controller main function
+
+	
+
+	
 }
