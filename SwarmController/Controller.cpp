@@ -2,12 +2,17 @@
 #include "SwarmNode.h"
 #include "SettingsEditor.h"
 #include <iostream>
+#include "Controller.h"
 
 using namespace std;
-int main() { // threads will be generated here
-	// virtual structure center will be published from here
-	//it is possible to use mutexes
-	cout << readFile() << endl;
-	 
+int main() { // will be deleted (how?)
+	
 	return 0;
+}
+
+ void Controller::controlMain()
+{
+	while (true) {
+		
+	}
 }
