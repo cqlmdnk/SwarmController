@@ -1,16 +1,36 @@
 #include "SwarmNode.h"
-#include <iostream>
 
 
+using namespace std;
 void SwarmNode::start(SwarmNode node)
 {
-	int v = 0;
+	
+	msr::airlib::MultirotorRpcLibClient client;
+
+	
+	client.enableApiControl(true, this->id);
+	client.armDisarm(true, this->id);
+	client.takeoffAsync(1 , this->id)->waitOnLastTask();
+
+	
+		
 	while (true) {
-		v++;
-		std::cout << "pause of " << v << " seconds ended\n";
-		if (v > 1000)
-			v = 0;
-	}
+		auto position = client.getMultirotorState(this->id).getPosition(); // from current location
+		client.moveToPositionAsync(position.x() + 5, position.y(), position.z(), 1, Utils::max<float>(),
+			DrivetrainType::MaxDegreeOfFreedom, YawMode(),
+			-1, 1, this->id)->waitOnLastTask();
+
+		Sleep(3000);
+		}
+		
+
+		
+
+	
+	client.landAsync(60, this->id)->waitOnLastTask();
+
+
+
 }
 
 

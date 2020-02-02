@@ -20,7 +20,6 @@ public:
 	wxListBox *m_list_vehicles = nullptr;
 	wxButton *m_add_btn = nullptr;
 	wxButton *m_start_btn = nullptr;
-	std::vector<SwarmNode*> swarmVector;
 	
 
 	void AddBtnOnButtonClicked(wxCommandEvent &evt);

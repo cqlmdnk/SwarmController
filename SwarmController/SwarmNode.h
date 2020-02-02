@@ -2,6 +2,8 @@
 #include <string>
 #include "vehicles/multirotor/api/MultirotorRpcLibClient.hpp"
 #include <thread> 
+#include <iostream>
+#include <Windows.h>
 class SwarmNode {
 public:
 	std::thread thread_;

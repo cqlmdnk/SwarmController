@@ -26,11 +26,6 @@
     <ClInclude Include="mainGUI.h" />
     <ClInclude Include="mFrame.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SwarmController\SwarmController.vcxproj">
-      <Project>{b76e6f13-8e7f-46e4-b961-24b2a8d8b8b8}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}</ProjectGuid>

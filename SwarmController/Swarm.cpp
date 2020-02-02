@@ -1,6 +1,5 @@
 #include "Swarm.h"
 
-
 static int size;
 
 

@@ -1,6 +1,14 @@
 #pragma once
+#include "Swarm.h"
+#include "../ShapesPoints/Points.h"
+#include "../ShapesPoints/ShapeFactory.h"
+#include "SwarmNode.h"
+#include "SettingsEditor.h"
+#include <iostream>
+#include <windows.h>
 
-static class Controller{
+class Controller{
 public:
-	static void controlMain();
+	static void controlMain(std::vector<SwarmNode*> swarmVector);
+	static void dispatchPoints(std::vector<Point> _points);
 };
