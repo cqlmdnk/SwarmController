@@ -9,6 +9,9 @@ public:
 	void addNode(SwarmNode node);
 	void go(std::vector<SwarmNode*> swarmVec);
 	
+	
+	
+	
 	//move outside thread make reachable for each thread
 
 	
