@@ -4,13 +4,16 @@
 #include <thread> 
 #include <iostream>
 #include <Windows.h>
+#include "PointsVector.h"
 class SwarmNode {
 public:
 	std::thread thread_;
 	string id = "";
-	void start(SwarmNode node);
+	int start(SwarmNode node);
 	float move(float alt, float lat, float lon, float vel);
 	float getInfo();
+	int getId();
+	bool flag();
 public:
 	SwarmNode(string id);
 	~SwarmNode();
