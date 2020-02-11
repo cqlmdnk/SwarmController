@@ -142,7 +142,6 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClientObject.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="PointsVector.cpp" />
     <ClCompile Include="SettingsEditor.cpp" />
