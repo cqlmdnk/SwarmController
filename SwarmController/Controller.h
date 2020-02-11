@@ -6,9 +6,13 @@
 #include "SettingsEditor.h"
 #include <iostream>
 #include <windows.h>
+#include "../ShapesPoints/Point.h"
+#include "PointsVector.h"
+#include <conio.h>
 
 class Controller{
 public:
+	
 	static void controlMain(std::vector<SwarmNode*> swarmVector);
 	static void dispatchPoints(std::vector<Point> _points);
 };

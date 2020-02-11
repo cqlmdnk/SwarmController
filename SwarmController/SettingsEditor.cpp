@@ -30,9 +30,11 @@ std::vector<std::string> SettingsEditor::readFile()
 std::vector<SwarmNode*> SettingsEditor::getDronesFromFile() {
 	std::vector<SwarmNode*> drones;
 	std::vector<std::string> dronesInFile = SettingsEditor::readFile();
+	
 
 	for (string v : dronesInFile) {
 		drones.push_back(new SwarmNode(v));
+		
 	}
 	return drones;
 }

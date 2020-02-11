@@ -71,11 +71,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\Project Main\SwarmController\SwarmController\AirLib\include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration);</LibraryPath>
+    <LibraryPath>E:\Project Main\SwarmController\x64\Debug;$(LibraryPath);$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\Project Main\SwarmController\SwarmController\AirLib\include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration);</LibraryPath>
+    <LibraryPath>E:\Project Main\SwarmController\x64\Debug;$(LibraryPath);$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,9 +98,12 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>E:\Project Main\SwarmController\SwarmController\AirLib\lib\x64\Debug;$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\Project Main\SwarmController\x64\Debug;E:\Project Main\SwarmController\SwarmController\AirLib\lib\x64\Debug;$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;ShapesPoints.lib;</AdditionalDependencies>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -131,18 +134,24 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>E:\Project Main\SwarmController\SwarmController\AirLib\lib\x64\Debug;$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\Project Main\SwarmController\x64\Debug;E:\Project Main\SwarmController\SwarmController\AirLib\lib\x64\Debug;$(ProjectDir)AirLib\lib\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;ShapesPoints.lib;</AdditionalDependencies>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClientObject.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="PointsVector.cpp" />
     <ClCompile Include="SettingsEditor.cpp" />
     <ClCompile Include="Swarm.cpp" />
     <ClCompile Include="SwarmNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="PointsVector.h" />
     <ClInclude Include="SettingsEditor.h" />
     <ClInclude Include="Swarm.h" />
     <ClInclude Include="SwarmNode.h" />
