@@ -13,6 +13,7 @@ Paraboloid::~Paraboloid()
 
 }
 
+
 double floorUnry(double x) {
 	return std::floor(x);
 }
@@ -34,13 +35,39 @@ std::vector<Point> Paraboloid::getPoints(int size)
 	// points that encapsulates the closed space
 	Matrix300fUpper = (Matrix300fUpper.array() > Matrix300fLower.array()).select(Matrix300fUpper,0);
 	Matrix300fLower = (Matrix300fLower.array() < Matrix300fUpper.array()).select(Matrix300fLower, 0);
+	double upperMin = Matrix300fUpper.minCoeff();
+	double lowerMin = Matrix300fLower.minCoeff();
+	if (upperMin < lowerMin) {
+		Matrix300fLower = (Matrix300fLower.array() - upperMin).matrix();
+		Matrix300fUpper = (Matrix300fUpper.array() - upperMin).matrix();
+	}
+	else {
+		Matrix300fLower = (Matrix300fLower.array() - lowerMin).matrix();
+		Matrix300fUpper = (Matrix300fUpper.array() - lowerMin).matrix();
+	}
+	double nupperMin = Matrix300fUpper.minCoeff();
+	double nlowerMin = Matrix300fLower.minCoeff();
+	if (nupperMin < nlowerMin) {
+		Matrix300fLower = (Matrix300fLower.array() / nlowerMin).matrix();
+		Matrix300fUpper = (Matrix300fUpper.array() / nlowerMin).matrix();
+	}
+	else {
+		Matrix300fLower = (Matrix300fLower.array() / nupperMin).matrix();
+		Matrix300fUpper = (Matrix300fUpper.array() / nupperMin).matrix();
+	}
 
-	std::cout << Matrix300fLower.unaryExpr(&floorUnry).format(CommaInitFmt) << std::endl;
+	Matrix300fLower = (Matrix300fLower.array() * 10).matrix();
+	Matrix300fUpper = (Matrix300fUpper.array() * 10).matrix();
+
+
 	std::cout << Matrix300fUpper.unaryExpr(&floorUnry).format(CommaInitFmt) << std::endl; //
+	std::cout << "-------------------------------------------------------------"<< std::endl;
+	std::cout << Matrix300fLower.unaryExpr(&floorUnry).format(CommaInitFmt) << std::endl; //
 
-	float factor = 1.0;
+
+	float factor = 0.2;
 	do{
-		factor += 5.00;
+		factor += 0.10;
 		returnPoints.clear();
 		for (int i = 0; i < Matrix300fLower.rows(); i++)
 		{

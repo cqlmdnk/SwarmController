@@ -18,9 +18,8 @@ int SwarmNode::start(SwarmNode node)
 	client.enableApiControl(true, this->id);
 	client.armDisarm(true, this->id);
 
-	client.takeoffAsync(1, this->id)->waitOnLastTask();
+	client.takeoffAsync(5, this->id)->waitOnLastTask();
 
-	client.hoverAsync(this->id);
 
 	int id = getId();
 	
@@ -32,15 +31,15 @@ int SwarmNode::start(SwarmNode node)
 			std::unique_lock<std::mutex> lck(PointsVector::mtx[id]);
 			PointsVector::cvr.wait(lck, [&] { return this->flag(); });
 			
-				client.enableApiControl(true, this->id);
-				client.armDisarm(true, this->id);
-
-				cout << this->id+":  "+to_string((PointsVector::pointsOnThreads.at(id).lngt) * 3) + " " + to_string((PointsVector::pointsOnThreads.at(id).lat) / 10) + " " + to_string((PointsVector::pointsOnThreads.at(id).alt) * 3 * (-1)) << endl;;
-				client.moveToPositionAsync((PointsVector::pointsOnThreads.at(id).lngt)*3, (PointsVector::pointsOnThreads.at(id).lat)/20, (PointsVector::pointsOnThreads.at(id).alt)*3 * (-1), 2, Utils::max<float>(),
-					DrivetrainType::MaxDegreeOfFreedom, YawMode(),
-					-1, 1, this->id)->waitOnLastTask();
 				
-				client.hoverAsync(this->id);
+			client.enableApiControl(true, this->id);
+			client.armDisarm(true, this->id);
+
+				cout << this->id+":  "+to_string((PointsVector::pointsOnThreads.at(id).lngt) * 3) + " " + to_string((PointsVector::pointsOnThreads.at(id).lat)*3) + " " + to_string((PointsVector::pointsOnThreads.at(id).alt) * 3 * (-1)) << endl;;
+				client.moveToPositionAsync((PointsVector::pointsOnThreads.at(id).lngt) * 3, (PointsVector::pointsOnThreads.at(id).lat)*10, (PointsVector::pointsOnThreads.at(id).alt) * 3 * (-1), 5, Utils::max<float>(),
+					DrivetrainType::MaxDegreeOfFreedom, YawMode(),
+					-1, 1, this->id)->waitOnLastTask(nullptr,1.0);
+				
 				PointsVector::flagsOnThreads[id] = false;
 				
 				PointsVector::cvr.notify_all();

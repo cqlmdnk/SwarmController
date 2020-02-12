@@ -13,6 +13,6 @@
 class Controller{
 public:
 	
-	static void controlMain(std::vector<SwarmNode*> swarmVector);
 	static void dispatchPoints(std::vector<Point> _points);
+	static void tunePositions(int signal);
 };

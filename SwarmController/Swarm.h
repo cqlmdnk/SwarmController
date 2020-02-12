@@ -12,7 +12,6 @@ public:
 	
 	
 	
-	//move outside thread make reachable for each thread
 
 	
 };
