@@ -1,5 +1,6 @@
 #include "ShapeFactory.h"
 #include "Paraboloid.h"
+#include "VFormation.h"
 
 std::shared_ptr<Points> ShapeFactory::CreateInstance(int type)
 {
@@ -9,6 +10,9 @@ std::shared_ptr<Points> ShapeFactory::CreateInstance(int type)
 	{
 	case PARAB:
 		instance = new Paraboloid();
+		break;
+	case VFOR:
+		instance = new VFormation();
 		break;
 	}
 	return std::shared_ptr<Points>(instance);

@@ -129,12 +129,16 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Points.cpp" />
     <ClCompile Include="ShapeFactory.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="VFormation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Paraboloid.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Points.h" />
     <ClInclude Include="ShapeFactory.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="VFormation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
