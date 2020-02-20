@@ -10,7 +10,7 @@ using json = nlohmann::json;
 
 std::vector<std::string> SettingsEditor::readFile()
 {
-	std::ifstream i("C:/Users/dell/Documents/AirSim/settings.json");
+	std::ifstream i(TARGET_DIRECTORY"/Documents/AirSim/settings.json");
 	json settingsFile;
 	i >> settingsFile;
 	std::vector<std::string> dronesInFile;
