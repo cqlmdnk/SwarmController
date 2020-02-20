@@ -1,5 +1,6 @@
 #include "SwarmNode.h"
-
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>   
 
 
 
@@ -12,37 +13,46 @@ using namespace std;
 int SwarmNode::start(SwarmNode node)
 {
 
-	msr::airlib::MultirotorRpcLibClient client;
+	PointsVector::t_mtx.lock();
 
+	PointsVector::client.enableApiControl(true, this->id);
+	PointsVector::client.armDisarm(true, this->id);
 
-	client.enableApiControl(true, this->id);
-	client.armDisarm(true, this->id);
-
-	client.takeoffAsync(5, this->id)->waitOnLastTask();
-
+	PointsVector::client.takeoffAsync(5, this->id);
+	PointsVector::t_mtx.unlock();
 
 	int id = getId();
-	
-		
+	srand(id);
+	int x, y, z;
 		
 		while (true) {
 			
-
+			
 			std::unique_lock<std::mutex> lck(PointsVector::mtx[id]);
 			PointsVector::cvr.wait(lck, [&] { return this->flag(); });
+			PointsVector::t_mtx.lock();
 			
-				
-			client.enableApiControl(true, this->id);
-			client.armDisarm(true, this->id);
+			LandedState isLanded = PointsVector::client.getMultirotorState(this->id).landed_state;
 
-				cout << this->id+":  "+to_string((PointsVector::pointsOnThreads.at(id).lngt) * 3) + " " + to_string((PointsVector::pointsOnThreads.at(id).lat)*3) + " " + to_string((PointsVector::pointsOnThreads.at(id).alt) * 3 * (-1)) << endl;;
-				client.moveToPositionAsync((PointsVector::pointsOnThreads.at(id).lngt) * 3, (PointsVector::pointsOnThreads.at(id).lat)*10, (PointsVector::pointsOnThreads.at(id).alt) * 3 * (-1), 5, Utils::max<float>(),
-					DrivetrainType::MaxDegreeOfFreedom, YawMode(),
-					-1, 1, this->id)->waitOnLastTask(nullptr,1.0);
+			if (isLanded == LandedState::Landed) {
+				PointsVector::client.enableApiControl(true, this->id);
+				PointsVector::client.armDisarm(true, this->id);
+				cout << "Landed, taking off..." << endl;
+				PointsVector::client.takeoffAsync(3, this->id);
 				
-				PointsVector::flagsOnThreads[id] = false;
+			}
+			x = rand() % 100 - 50;
+			y = rand() % 100 - 50;
+			z = (rand() % 20) * -1;
+			cout << "Moving to poistion..." + to_string(x)+ "-"+ to_string(y)+ "-"+ to_string(z) << endl;
+			PointsVector::client.moveToPositionAsync(x, y, z, 4, Utils::max<float>(),
+				DrivetrainType::MaxDegreeOfFreedom, YawMode(),
+				-1, 1, this->id);
+			
+			PointsVector::t_mtx.unlock();
+			PointsVector::flagsOnThreads[id] = false;
 				
-				PointsVector::cvr.notify_all();
+			PointsVector::cvr.notify_all();
 			
 		}
 	

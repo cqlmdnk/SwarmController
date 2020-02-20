@@ -18,15 +18,26 @@ int main() { // entry point of the process that is executed by the end of Start 
 	swarm.go(swarmVector);
 
 	ShapeFactory _factory = ShapeFactory();
-	auto _shape = _factory.CreateInstance(PARAB);
+	auto _shape = _factory.CreateInstance(VFOR);
 
-	std::vector<Point> _points = _shape->getPoints(SIZE);
+	std::vector<Point> _points = _shape->getPoints(100);
 	std::cout << _points.size() << std::endl;
 	int chr = getch();
 
 	Controller::dispatchPoints(_points);
+	Sleep(2000);
+	Controller::dispatchPoints(_points);
+
 	while (1) {
-		int chr = getch();
+		for (int i = 0; i < 100; i++) {
+			std::unique_lock<std::mutex> lck(PointsVector::mtx[i]);
+			PointsVector::flagsOnThreads[i] = true;
+		}
+
+		PointsVector::cvr.notify_all();
+		PointsVector::cvr.notify_one();
+		Sleep(10*1000);
+		/*
 		if (chr == 72) {
 			Controller::tunePositions(INC_Z);
 		}
@@ -45,6 +56,14 @@ int main() { // entry point of the process that is executed by the end of Start 
 		else if (chr == 52) {
 			Controller::tunePositions(DEC_X);
 		}
+		else if (chr == 10) {
+			Controller::dispatchPoints(_points);
+		}
+		else {*/
+
+				
+			//}
+		
 
 	}
 	return 0;
