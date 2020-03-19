@@ -126,7 +126,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Paraboloid.cpp" />
-    <ClCompile Include="Point.cpp" />
     <ClCompile Include="Points.cpp" />
     <ClCompile Include="ShapeFactory.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -134,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Paraboloid.h" />
-    <ClInclude Include="Point.h" />
     <ClInclude Include="Points.h" />
     <ClInclude Include="ShapeFactory.h" />
     <ClInclude Include="Sphere.h" />

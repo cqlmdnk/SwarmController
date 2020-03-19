@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
 #include <fstream> 
 #include <iostream> 
 #include<iomanip>
+#include <vector>
 #include "SwarmNode.h"
 
 using namespace std;

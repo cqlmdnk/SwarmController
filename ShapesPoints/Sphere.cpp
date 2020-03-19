@@ -9,32 +9,42 @@ Sphere::~Sphere()
 
 }
 
+using namespace std;
+
+const double PI = 3.141592654;
+double irand(int min, int max);
 
 
-std::vector<Point> Sphere::getPoints(int size)
+
+// generate random number for the range (min, max)
+
+
+
+
+
+std::vector<Vector3f> Sphere::getPoints(int size, int scale = 10)
 {
 	//operations will be done on Matrix300f and its transpose
 
-	std::vector<Point> returnPoints;
+	srand((unsigned)time(NULL));
 
-	MatrixXf Matrix300fUpper = MatrixXf(11, 11);
-	MatrixXf Matrix300fLower = MatrixXf(11, 11);
+	std::vector<Vector3f> returnPoints(size);
 
-	// sphere formulas
+	double theta = 0, phi = 0;
+	for (int i = 0; i < size; i++) {
+		theta = 2 * PI *irand(0, 1);
+		// corrrect
+		phi = acos(2 * irand(0, 1) - 1.0);
+		// incorrect
+		//phi = PI*irand(0,1);
+		returnPoints[i] = Vector3f(scale * cos(theta)*sin(phi), scale * sin(theta)*sin(phi), (-1.0f) * scale * (cos(phi) + 1.0f) - 4.0f);
 
-	
-	
-
-	Points::normalizeMatrices(Matrix300fUpper, Matrix300fLower);
-	
-
-	float factor = 0.2;
-	do {
-		factor += 0.10;
-		returnPoints.clear();
-		
-	} while ((size + 5 < returnPoints.size()));
+	}
 	return returnPoints;
 }
 
 
+double irand(int min, int max)
+{
+	return ((double)rand() / ((double)RAND_MAX + 1.0)) * (max - min) + min;
+}

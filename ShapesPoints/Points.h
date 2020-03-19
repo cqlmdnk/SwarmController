@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
-#include "Point.h"
+#include "PLocal.h"
 #include "include/Eigen/Dense"
+#include <ctime>
+#include <cmath>
 
 #define PARAB 0
 #define CIRC 1
@@ -17,7 +19,7 @@ public:
 	MatrixXf Matrix300f = MatrixXf(11,11); // move to base class constructor if it's possible
 	RowVectorXf Vector300f = RowVectorXf(11);
 	Points();
-	virtual std::vector<Point> getPoints(int size) = 0;
+	virtual std::vector<Vector3f> getPoints(int size, int scale) = 0;
 	void normalizeMatrices(MatrixXf& upper, MatrixXf& lower);
 	double floorUnry(double x);
 	
