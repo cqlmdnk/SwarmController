@@ -6,13 +6,12 @@
 #include "SettingsEditor.h"
 #include <iostream>
 #include <windows.h>
-#include "../ShapesPoints/Point.h"
+#include "../ShapesPoints/PLocal.h"
 #include "PointsVector.h"
 #include <conio.h>
 
 class Controller{
 public:
 	
-	static void dispatchPoints(std::vector<Point> _points);
-	static void tunePositions(int signal);
+	static void dispatchPoints(std::vector<Vector3f> _points);
 };

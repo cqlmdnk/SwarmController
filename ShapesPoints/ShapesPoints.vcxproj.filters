@@ -24,9 +24,6 @@
     <ClCompile Include="ShapeFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Paraboloid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ShapeFactory.h">

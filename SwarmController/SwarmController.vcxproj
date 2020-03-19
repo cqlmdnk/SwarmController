@@ -94,13 +94,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\deps;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CollisionAvoidamce;$(ProjectDir)\include;$(ProjectDir)\deps;$(OPENCV_DIR)build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_DIRECTORY=LR"|($(HOMEPATH))|";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(PlatformTarget)\$(Configuration);$(ProjectDir)\lib\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;ShapesPoints.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(PlatformTarget)\$(Configuration);$(ProjectDir)\lib\$(Platform)\$(Configuration);$(OPENCV_DIR)build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world420d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;ShapesPoints.lib;</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -143,14 +143,20 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ContourArea.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="ImageFetch.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="PointsVector.cpp" />
     <ClCompile Include="SettingsEditor.cpp" />
     <ClCompile Include="Swarm.cpp" />
     <ClCompile Include="SwarmNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ContourArea.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="ImageFetch.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="PointsVector.h" />
     <ClInclude Include="SettingsEditor.h" />
     <ClInclude Include="Swarm.h" />

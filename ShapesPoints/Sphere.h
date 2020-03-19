@@ -1,10 +1,11 @@
 #pragma once
-#include "Point.h"
+#include "PLocal.h"
 #include "Points.h"
 class Sphere : public Points
 {
+public:
 	Sphere();
 	~Sphere();
-	virtual std::vector<Point> getPoints(int size);
+	virtual std::vector<Vector3f> getPoints(int size, int scale);
 };
 

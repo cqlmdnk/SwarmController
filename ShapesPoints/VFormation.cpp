@@ -15,57 +15,56 @@ VFormation::~VFormation()
 
 
 
-std::vector<Point> VFormation::getPoints(int size)
+std::vector<Vector3f> VFormation::getPoints(int size , int scale = 10)
 {
-	std::vector<Point> returnPoints;
+	std::vector<Vector3f> returnPoints;
 
-	VectorXf VectorXDomain = VectorXf(21);
-	VectorXDomain.setLinSpaced(21, 0, 20);
+	VectorXf VectorXDomain = VectorXf(int(size/4));
+	VectorXDomain.setLinSpaced(int(size / 4), 0, scale*2);
 
-	VectorXf Vector300fUpper = VectorXf(21);
-	VectorXf Vector300fLower = VectorXf(21);
+	VectorXf Vector300fUpper = VectorXf(int(size / 4));
+	VectorXf Vector300fLower = VectorXf(int(size / 4));
 
 	// vformation formulas
 
-	std::cout << VectorXDomain << std::endl;
 
 	Vector300fLower = 2*((VectorXDomain.array())+8).matrix();
 	Vector300fUpper = 2*(2*(VectorXDomain.array()+8)).matrix();
 
-	std::cout << Vector300fLower << std::endl;
-	std::cout << Vector300fUpper << std::endl;
+	
 
 	//VFormation::normalizeVectors(Vector300fLower, Vector300fUpper);
 
 
-	float factor = 0.2;
+	float factor = 0.1f;
 	do {
-		factor += 0.1;
+		factor += 0.1f;
 		returnPoints.clear();
 		for (int i = 0; i < Vector300fUpper.rows(); i++)
 		{
-			std::vector<Point> obtainedPoints = VFormation::obtainPoints(factor, 10, i, Vector300fLower(i,0), Vector300fUpper(i,0));
+			std::vector<Vector3f> obtainedPoints = VFormation::obtainPoints(factor, i*4, -10, Vector300fLower(i,0), Vector300fUpper(i,0));
 			returnPoints.insert(std::end(returnPoints), std::begin(obtainedPoints), std::end(obtainedPoints));
 			obtainedPoints.clear();
 			
 		}
+		
 	} while ((size/2 < returnPoints.size()));
-	VFormation::mirrorPoints(returnPoints);
+	VFormation::mirrorPoints(returnPoints, (Vector300fUpper.rows()-1)*4);
 	return returnPoints;
 }
 
-std::vector<Point> VFormation::obtainPoints(float factor, int x, int y, float z_begin, float z_end) {
-	std::vector<Point> obtainedPoints;
+std::vector<Vector3f> VFormation::obtainPoints(float factor, int x, int z, float y_begin, float y_end) {
+	std::vector<Vector3f> obtainedPoints;
 
-	int pointsCount = abs((z_begin - z_end) / factor);
-	if (pointsCount == 0 && z_begin != z_end) {
-		obtainedPoints.push_back(Point((z_begin + z_end) / 2, x,y));
+	int pointsCount = int(abs((y_begin - y_end) / factor));
+	if (pointsCount == 0 && y_begin != y_end) {
+		obtainedPoints.push_back(Vector3f(x,(y_begin + y_end) / 2, z-10));
 		return obtainedPoints;
 	}
 
 	for (int i = 0; i < pointsCount; i++) {
 
-		obtainedPoints.push_back(Point((z_begin + i * factor)-70, x-10, y-10));
+		obtainedPoints.push_back(Vector3f(x, (y_begin + i * factor), z-10));
 	}
 
 	return obtainedPoints;
@@ -105,8 +104,13 @@ void VFormation::normalizeVectors(RowVectorXf& upper, RowVectorXf& lower) {
 	
 }
 
-void VFormation::mirrorPoints(std::vector<Point>& returnPoints) {
+void VFormation::mirrorPoints(std::vector<Vector3f>& returnPoints, int rowCount) {
 	for (auto point : returnPoints) {
-		returnPoints.push_back(Point(-point.lat-1, point.alt, point.lngt));
+		returnPoints.push_back(Vector3f(-point.x()+1+2*rowCount, point.y(), point.z()));
+		
 	}
+	for (auto point : returnPoints) {
+		std::cout << std::to_string(point.x()) + " , " + std::to_string(point.y()) + " , " + std::to_string(point.z()) << std::endl;
+	}
+	int c = 0;
 }

@@ -6,8 +6,8 @@ class VFormation :
 public:
 	VFormation();
 	~VFormation();
-	virtual std::vector<Point> getPoints(int size);
-	std::vector<Point> obtainPoints(float factor, int x, int y, float z_begin, float z_end);
+	virtual std::vector<Vector3f> getPoints(int size, int scale);
+	std::vector<Vector3f> obtainPoints(float factor, int x, int y, float z_begin, float z_end);
 	void normalizeVectors(RowVectorXf& upper, RowVectorXf& lower);
-	void mirrorPoints(std::vector<Point>& returnPoints);
+	void mirrorPoints(std::vector<Vector3f>& returnPoints, int rowCount);
 };
