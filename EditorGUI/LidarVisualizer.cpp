@@ -1,9 +1,141 @@
-#include "Collision.h"
+#include "LidarVisualizer.h"
+#include <wx/dcbuffer.h>
+#include "vehicles/multirotor/api/MultirotorRpcLibClient.hpp"
+
 using namespace Eigen;
-bool* Collision::getAvailDirs(std::string name)
+
+
+LidarVisualizer::LidarVisualizer() :  wxFrame(nullptr, wxID_ANY, "Lidar", wxPoint(20, 20), wxSize(1280, 720))
 {
-	msr::airlib::LidarData lidar1 = PointsVector::client.getLidarData("MyLidar1", name);
-	msr::airlib::LidarData lidar2 = PointsVector::client.getLidarData("MyLidar2", name);
+	
+	drawPane = new wxPanel(this);
+	wxClientDC dc(drawPane);
+	drawPane->Bind(wxEVT_KEY_DOWN, &LidarVisualizer::OnKeyDownf, this);
+
+	Show();
+	posVecs[0] = Vector3f(1.0f, 0.0f, 0.0f);
+	posVecs[1] = Vector3f(0.6f, 0.3f, 0.0f);
+	posVecs[2] = Vector3f(0.3f, 0.6f, 0.0f);
+	posVecs[3] = Vector3f(0.0f, 1.0f, 0.0f);
+	posVecs[4] = Vector3f(-0.3f, 0.6f, 0.0f);
+	posVecs[5] = Vector3f(-0.6f, 0.3f, 0.0f);
+	posVecs[6] = Vector3f(-1.0f, 0.0f, 0.0f);
+	posVecs[7] = Vector3f(-0.6f, -0.3f, 0.0f);
+	posVecs[8] = Vector3f(-0.3f, -0.6f, 0.0f);
+	posVecs[9] = Vector3f(0.0f, -1.0f, 0.0f);
+	posVecs[10] = Vector3f(0.3f, -0.6f, 0.0f);
+	posVecs[11] = Vector3f(0.6f, -0.3f, 0.0f);
+}
+
+wxBEGIN_EVENT_TABLE(LidarVisualizer, wxFrame)
+// some useful events
+/*
+ EVT_MOTION(BasicDrawPane::mouseMoved)
+ EVT_LEFT_DOWN(BasicDrawPane::mouseDown)
+ EVT_LEFT_UP(BasicDrawPane::mouseReleased)
+ EVT_RIGHT_DOWN(BasicDrawPane::rightClick)
+ EVT_LEAVE_WINDOW(BasicDrawPane::mouseLeftWindow)
+ EVT_KEY_DOWN(BasicDrawPane::keyPressed)
+ EVT_KEY_UP(BasicDrawPane::keyReleased)
+ EVT_MOUSEWHEEL(BasicDrawPane::mouseWheelMoved)
+ */
+
+ // catch paint events
+	EVT_PAINT(LidarVisualizer::paintEvent)
+	EVT_ERASE_BACKGROUND(LidarVisualizer::OnEraseBackGround)
+	EVT_CLOSE(LidarVisualizer::OnClose)
+	
+	wxEND_EVENT_TABLE()
+
+
+
+
+LidarVisualizer::~LidarVisualizer()
+{
+}
+void LidarVisualizer::WxTimer1Timer(wxTimerEvent& event)
+{
+	Refresh();
+}
+void LidarVisualizer::paintEvent(wxPaintEvent & evt)
+{
+	wxBufferedPaintDC dc(drawPane);
+	render(dc);
+}
+void LidarVisualizer::OnKeyDownf(wxKeyEvent& evt)
+{
+	evt.Skip();
+	c++;
+	if (c >= 12) {
+		c = 0;
+	}
+	evt.Skip(false); //not further process
+	Refresh(false);
+	
+	
+}
+
+
+void LidarVisualizer::render(wxDC&  dc)
+{
+	// draw some text
+	dc.Clear();
+	dc.DrawText(wxT("Testing"+ std::to_string(c)), 40, 60);
+	bool* dirs = new bool[38];
+	dirs = getAvailDirs("SwarmNode1");
+	// draw a circle
+	//dc.SetBrush(*wxBLACK_BRUSH); // green filling
+
+	dc.SetPen(wxPen(wxColor(243, 0, 0), 1));
+	dc.SetBrush(*wxRED_BRUSH);
+
+
+	for (size_t i = 0; i < 36; i++)
+	{
+
+		if (!dirs[i]) {
+			dc.DrawEllipticArc(wxPoint(300, 120), wxSize(600, 600), i*(10), (i+1)*10);
+		}
+	}
+
+	Vector3f uVec = posVecs[c];
+
+	float x_angleU = atan2(uVec.y() , uVec.x()) * 180 / M_PI;
+	dc.SetBrush(*wxGREEN_BRUSH);
+	dc.SetPen(wxPen(wxColor(20, 20, 120), 1));
+	dc.DrawEllipticArc(wxPoint(500, 320), wxSize(200, 200), x_angleU - 5, x_angleU + 5);
+
+	Vector3f mVec =  getManeVec("SwarmNode1", uVec, 10.0f);
+	dc.SetBrush(*wxBLUE_BRUSH);
+	float x_angleM = atan2(mVec.y(), mVec.x()) * 180 / M_PI;
+	dc.SetPen(wxPen(wxColor(20, 255, 20), 1));
+	dc.DrawEllipticArc(wxPoint(500, 320), wxSize(200, 200), x_angleM - 5, x_angleM + 5);
+
+	dc.SetPen(wxPen(wxColor(0, 0, 255), 1));
+	dc.SetBrush(*wxCYAN_BRUSH);
+	dc.DrawEllipticArc(wxPoint(500, 320), wxSize(200, 200), yaw-5, yaw+5);
+
+	dc.SetPen(wxPen(wxColor(0, 0, 0), 2));
+	dc.DrawCircle(wxPoint(600, 420), wxCoord(4));
+	// Look at the wxDC docs to learn how to draw other stuff
+}
+
+
+
+
+bool* LidarVisualizer::getAvailDirs(std::string name)
+{
+	msr::airlib::MultirotorRpcLibClient client;
+	msr::airlib::LidarData lidar1 = client.getLidarData("MyLidar1", name);
+	msr::airlib::LidarData lidar2 = client.getLidarData("MyLidar2", name);
+	
+	msr::airlib::Quaternionr quat = client.getMultirotorState(name).getOrientation();
+	double w = quat.w();
+	double x = quat.x();
+	double y = quat.y();
+	double z = quat.z();
+
+	yaw = (atan2(2.0f * (w * z + x * y), w * w + x * x - y * y - z * z)*180/M_PI ) ;
 
 
 
@@ -19,7 +151,7 @@ bool* Collision::getAvailDirs(std::string name)
 
 
 
-	Vector3f pos = PointsVector::client.getMultirotorState(name).getPosition();
+	Vector3f pos = client.getMultirotorState(name).getPosition();
 	MatrixXf result = totalData.rowwise() + (-pos).transpose();
 
 	MatrixX2f finalMatrixE(result.rows(), 2);
@@ -96,10 +228,12 @@ bool* Collision::getAvailDirs(std::string name)
 
 }
 
-Vector3f Collision::getManeVec(std::string name, Vector3f unitTargetVec, float yaw)
+
+
+Vector3f LidarVisualizer::getManeVec(std::string name, Vector3f unitTargetVec, float yaw)
 {
 	bool* directions = new bool[38];
-	directions = Collision::getAvailDirs(name);
+	directions = LidarVisualizer::getAvailDirs(name);
 	Matrix3f rotMatrix;
 	Vector3f maneuver = unitTargetVec;
 	float x_angle = atan2(unitTargetVec.y(), unitTargetVec.x());
@@ -168,7 +302,3 @@ Vector3f Collision::getManeVec(std::string name, Vector3f unitTargetVec, float y
 	return maneuver;
 
 }
-
-
-
-

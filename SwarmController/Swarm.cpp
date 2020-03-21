@@ -23,8 +23,11 @@ void Swarm::go(std::vector<SwarmNode*> swarmVec)
 		PointsVector::client.armDisarm(true, name);
 		PointsVector::client.takeoffAsync(1, name);
 		PointsVector::client.moveByVelocityAsync(0, 0, -3, 3, msr::airlib::DrivetrainType::ForwardOnly, msr::airlib::YawMode(false, 0), name);
+		PointsVector::client.hoverAsync(name);
+
+
 	}
-	Sleep(3000);
+
 	float totalDist = 0.0f;
 	while (1) {
 
@@ -49,13 +52,13 @@ void Swarm::go(std::vector<SwarmNode*> swarmVec)
 
 			}
 
-			Vector3f p = PointsVector::pointsOnThreads.at(id);
+			Vector3f p = PointsVector::pointsOnThreads.at(id) + PointsVector::swarmCenter;
 			auto c_p = PointsVector::client.getMultirotorState(name).getPosition();
 			Vector3r targetVec = Vector3r((p.x() - c_p.x()), (p.y() - c_p.y()), (p.z() - c_p.z()));
 			float dist = sqrt(pow(targetVec.x(), 2) + pow(targetVec.y(), 2) + pow(targetVec.z(), 2));
 
 
-			
+
 			//std::cout << std::to_string(id) + " : Moving to poistion... | " + std::to_string(p.x()) + " | " + std::to_string(p.y()) + " | " + std::to_string(p.z()) << std::endl;
 			Vector3r unitTargetVec = Vector3r(targetVec.x() / dist, targetVec.y() / dist, targetVec.z() / dist);
 			//std::cout << std::to_string(id) + " : Moving with vector..." + std::to_string(unitTargetVec.x()) + "-" + std::to_string(unitTargetVec.y()) + "-" + std::to_string(unitTargetVec.z()) << std::endl;
@@ -68,7 +71,7 @@ void Swarm::go(std::vector<SwarmNode*> swarmVec)
 			if (dist <= 1.0f) {
 				PointsVector::client.hoverAsync(name);
 				//std::cout << "Hovering " + name << std::endl;
-				
+
 
 			}
 			else {
@@ -81,11 +84,11 @@ void Swarm::go(std::vector<SwarmNode*> swarmVec)
 				float yaw = atan2(2.0f * (w * z + x * y), w * w + x * x - y * y - z * z);
 
 				Vector3r maneuverVec = Collision::getManeVec(name, unitTargetVec, yaw);
-				float scale = min(log(dist)*3+0.5f,3);
-				
+				float scale = min(log(dist) * 3 + 0.5f, 3);
+
 				PointsVector::client.moveByVelocityAsync(maneuverVec.x() * scale, maneuverVec.y() * scale, maneuverVec.z() * scale, 1, msr::airlib::DrivetrainType::ForwardOnly, msr::airlib::YawMode(false, 0), name);
 				//std::cout << name + " : " + std::to_string(dist) << std::endl;
-				
+
 			}
 			//PointsVector::client.getMultirotorState().getOrientation();
 			//float pitch, roll, yaw2;
@@ -93,12 +96,8 @@ void Swarm::go(std::vector<SwarmNode*> swarmVec)
 
 		}
 		std::cout << "Total distance : " + std::to_string(totalDist) << std::endl;
+		PointsVector::totalDistance = totalDist;
 		
-		if (totalDist < 25.0f) {
-			auto rng = std::default_random_engine{};
-			std::shuffle(std::begin(PointsVector::pointsOnThreads), std::end(PointsVector::pointsOnThreads), rng);
-			std::cout << "shuffling" << std::endl;
-		}
 		Sleep(100);
 
 	}

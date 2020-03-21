@@ -14,4 +14,5 @@ class Controller{
 public:
 	
 	static void dispatchPoints(std::vector<Vector3f> _points);
+	static void mainSim();
 };

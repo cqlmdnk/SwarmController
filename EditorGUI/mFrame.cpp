@@ -24,7 +24,7 @@ mFrame::~mFrame() {
 
 }
 void mFrame::AddBtnOnButtonClicked(wxCommandEvent &evt) { 
-	std::ifstream t("camera_settings.txt");
+	std::ifstream t("E:\\Project Main\\SwarmController\\x64\\Debug\\camera_settings.txt");
 	std::string str((std::istreambuf_iterator<char>(t)),
 		std::istreambuf_iterator<char>());
 	string jsonString = string();
@@ -103,9 +103,11 @@ void mFrame::StartBtnOnButtonClicked(wxCommandEvent &evt) { //set path to unreal
 
 void mFrame::loadListBox(wxListBox* m_list_vehicles) {
 	m_list_vehicles->Clear();
-	std::ifstream t("C:/Users/dell/Documents/AirSim/settings.json");
+	std::ifstream t("C:\\Users\\dell\\Documents\\AirSim\\settings.json");
 	std::string str;
-
+	if (!t.is_open()) {
+		return;
+	}
 	t.seekg(0, std::ios::end);
 	str.reserve(t.tellg());
 	t.seekg(0, std::ios::beg);
