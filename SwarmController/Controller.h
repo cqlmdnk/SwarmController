@@ -6,7 +6,6 @@
 #include "SettingsEditor.h"
 #include <iostream>
 #include <windows.h>
-#include "../ShapesPoints/PLocal.h"
 #include "PointsVector.h"
 #include <conio.h>
 

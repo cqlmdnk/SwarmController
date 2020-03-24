@@ -12,12 +12,13 @@
 
 class Swarm {
 public:
-	static std::vector<PLocal> points;
 	void addNode(SwarmNode node);
-	void go(std::vector<SwarmNode*> swarmVec);
+	void start(std::vector<SwarmNode*> swarmVec);
 	int getId(string name);
-	Vector3r getManeuver(bool* directions, Vector3r unitVec);
-	
+	void go(std::vector<SwarmNode*> &swarmVec);
+	void land(std::vector<SwarmNode*> &swarmVec);
+	void hover(std::vector<SwarmNode*> &swarmVec);
+	void takeoff(std::vector<SwarmNode*> &swarmVec);
 	
 
 	

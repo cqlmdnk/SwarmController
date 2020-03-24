@@ -54,8 +54,8 @@ bool* Collision::getAvailDirs(std::string name)
 		if (!std::isnan(finalMatrix(i, 0)) && !std::isinf(finalMatrix(i, 0))) {
 			if (finalMatrix(i, 0) <= (3 * M_PI / 4) && finalMatrix(i, 0) >= (M_PI / 4)) {
 
-				container.push_back(finalMatrix(i, 0) * 180 / M_PI);
-				container.push_back(finalMatrix(i, 1) * 180 / M_PI);
+				container.push_back(float(finalMatrix(i, 0) * 180 / M_PI));
+				container.push_back(float(finalMatrix(i, 1) * 180 / M_PI));
 
 
 			}
@@ -104,7 +104,7 @@ Vector3f Collision::getManeVec(std::string name, Vector3f unitTargetVec, float y
 	Vector3f maneuver = unitTargetVec;
 	float x_angle = atan2(unitTargetVec.y(), unitTargetVec.x());
 	if (x_angle < 0) {
-		x_angle += 2 * M_PI;
+		x_angle += float(2 * M_PI);
 	}
 	//if (strcmp(name.c_str(), "SwarmNode1") == 0) {
 		//for (size_t i = 0; i < 8; i++)
