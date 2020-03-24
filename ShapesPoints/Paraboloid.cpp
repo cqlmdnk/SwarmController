@@ -51,13 +51,13 @@ std::vector<Vector3f> Paraboloid::obtainPoints(float factor, int x, int y, float
 
 	int pointsCount = int(abs((z_begin - z_end) / factor));
 	if (pointsCount == 0 && z_begin != z_end) {
-		obtainedPoints.push_back(Vector3f((z_begin + z_end) / 4, x, -(y + 10)*0.8f));
+		obtainedPoints.push_back(Vector3f(float((z_begin + z_end) / 4), float(x), float(-(y + 10)*0.8f)));
 		return obtainedPoints;
 	}
 
 	for (int i = 0; i < pointsCount; i++) {
 
-		obtainedPoints.push_back(Vector3f((z_begin + i * factor)/2.0f, x, -(y + 10.0f)*0.8f));
+		obtainedPoints.push_back(Vector3f(float((z_begin + i * factor)/2.0f), float(x), float(-(y + 10.0f)*0.8f)));
 	}
 	return obtainedPoints;
 

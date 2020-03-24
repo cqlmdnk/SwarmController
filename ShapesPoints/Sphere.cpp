@@ -37,7 +37,7 @@ std::vector<Vector3f> Sphere::getPoints(int size, int scale = 10)
 		phi = acos(2 * irand(0, 1) - 1.0);
 		// incorrect
 		//phi = PI*irand(0,1);
-		returnPoints[i] = Vector3f(scale * cos(theta)*sin(phi), scale * sin(theta)*sin(phi), (-1.0f) * scale * (cos(phi) + 1.0f) - 4.0f);
+		returnPoints[i] = Vector3f(float(scale * cos(theta)*sin(phi)), float(scale * sin(theta)*sin(phi)), float((-1.0f) * scale * (cos(phi) + 1.0f) - 4.0f));
 
 	}
 	return returnPoints;
