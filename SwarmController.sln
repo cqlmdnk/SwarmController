@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SwarmController", "SwarmController\SwarmController.vcxproj", "{B76E6F13-8E7F-46E4-B961-24B2A8D8B8B8}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EditorGUI", "EditorGUI\EditorGUI.vcxproj", "{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapesPoints", "ShapesPoints\ShapesPoints.vcxproj", "{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}"
 EndProject
@@ -25,14 +23,6 @@ Global
 		{B76E6F13-8E7F-46E4-B961-24B2A8D8B8B8}.Release|x64.Build.0 = Release|x64
 		{B76E6F13-8E7F-46E4-B961-24B2A8D8B8B8}.Release|x86.ActiveCfg = Release|Win32
 		{B76E6F13-8E7F-46E4-B961-24B2A8D8B8B8}.Release|x86.Build.0 = Release|Win32
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Debug|x64.ActiveCfg = Debug|x64
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Debug|x64.Build.0 = Debug|x64
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Debug|x86.ActiveCfg = Debug|Win32
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Debug|x86.Build.0 = Debug|Win32
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Release|x64.ActiveCfg = Release|x64
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Release|x64.Build.0 = Release|x64
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Release|x86.ActiveCfg = Release|Win32
-		{A40E18F4-163C-4EBC-A546-ED0E5EFAC97A}.Release|x86.Build.0 = Release|Win32
 		{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}.Debug|x64.ActiveCfg = Debug|x64
 		{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}.Debug|x64.Build.0 = Debug|x64
 		{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}.Debug|x86.ActiveCfg = Debug|Win32

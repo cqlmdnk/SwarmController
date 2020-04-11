@@ -1,7 +1,7 @@
 #pragma once
 #include "wx/wx.h"
 #include "RenderTimer.h"
-#include "Eigen/Eigen"
+#include "deps/eigen3/Eigen/Eigen"
 class LidarVisualizer : public wxFrame
 {
 

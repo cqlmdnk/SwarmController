@@ -1,5 +1,5 @@
 #pragma once
-#include "wx/wx.h"
+#include "wx/setup.h"
 #include "mFrame.h"
 #include "LidarVisualizer.h"
 #include "PathPlanner.h"

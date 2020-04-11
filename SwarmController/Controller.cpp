@@ -21,12 +21,12 @@ void Controller::mainSim() { // entry point of the process that is executed by t
 	ShapeFactory _factory = ShapeFactory();
 	auto _shape = _factory.CreateInstance(SPHE);
 
-	std::vector<Vector3f> _points = _shape->getPoints(SIZE,15);
+	std::vector<Vector3f> _points = _shape->getPoints(SIZE,1000);
 
 	Controller::dispatchPoints(_points);
-	std::thread thread_ = std::thread(&Swarm::start, std::move(swarm), swarmVector);
-	thread_.detach(); // detaching thread , there will be no join
 	
+	std::thread thread_object(&Swarm::start, std::move(swarm), swarmVector);
+	thread_object.detach();
 	Sleep(2000);
 	bool reach = true;
 	
@@ -51,6 +51,7 @@ void Controller::mainSim() { // entry point of the process that is executed by t
 		
 
 	}
+	
 }
 
 

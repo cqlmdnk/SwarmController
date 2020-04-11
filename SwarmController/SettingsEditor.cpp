@@ -12,7 +12,7 @@ std::vector<std::string> SettingsEditor::readFile()
 {
 	
 	
-	std::ifstream t("C:/Users/dell/Documents/AirSim/settings.json");
+	std::ifstream t("C:/Users/bbari/OneDrive/Documents/AirSim/settings.json");
 	std::string str;
 
 	t.seekg(0, std::ios::end);

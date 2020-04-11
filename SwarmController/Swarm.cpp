@@ -23,6 +23,8 @@ void Swarm::start(std::vector<SwarmNode*> swarmVec)
 		Vector3f c_p = PointsVector::client.getMultirotorState(name).getPosition();
 		PointsVector::nodePositions.at(id) = c_p;
 	}
+	Swarm::takeoff(swarmVec);
+	Sleep(3000);
 	while (true) {
 		switch (PointsVector::state)
 		{
@@ -100,7 +102,8 @@ void Swarm::go(std::vector<SwarmNode*> &swarmVec) {
 				float scale = min(log(dist) * 3 + 0.5f, 3);
 
 				PointsVector::client.moveByVelocityAsync(maneuverVec.x() * scale, maneuverVec.y() * scale, maneuverVec.z() * scale, 1, msr::airlib::DrivetrainType::ForwardOnly, msr::airlib::YawMode(false, 0), name);
-				//std::cout << name + " : " + std::to_string(dist) << std::endl;
+				//PointsVector::client.moveToPositionAsync(10, 20, -20, 1);
+				std::cout << name + " : " + std::to_string(dist) << std::endl;
 
 			}
 		}

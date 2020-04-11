@@ -30,7 +30,7 @@ PathPlanner::~PathPlanner()
 void PathPlanner::paintEvent(wxPaintEvent & evt)
 {
 	evt.Skip();
-	wxBufferedPaintDC dc(drawPane);
+	wxBufferedPaintDC dc(this);
 	render(dc);
 }
 

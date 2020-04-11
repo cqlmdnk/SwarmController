@@ -94,13 +94,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\deps;$(OPENCV_DIR)build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\AirLib\include;$(ProjectDir)\AirLib\deps\eigen3;$(ProjectDir)\AirLib\deps;$(OPENCV_DIR)build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TARGET_DIRECTORY=LR"|($(HOMEPATH))|";%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(PlatformTarget)\$(Configuration);$(ProjectDir)\lib\$(Platform)\$(Configuration);$(OPENCV_DIR)build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world420d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;ShapesPoints.lib;</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world430d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);AirLib.lib;ShapesPoints.lib;</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -161,11 +161,6 @@
     <ClInclude Include="SettingsEditor.h" />
     <ClInclude Include="Swarm.h" />
     <ClInclude Include="SwarmNode.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ShapesPoints\ShapesPoints.vcxproj">
-      <Project>{1b4b8c33-dcb9-4527-a3ee-5ccb28a17333}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

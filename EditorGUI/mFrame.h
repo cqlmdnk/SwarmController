@@ -1,6 +1,6 @@
 #pragma once
 #include "wx/wx.h"
-#include "../SwarmController/include/json.hpp"
+#include "json.hpp"
 
 #include <string>
 #include <fstream> 
