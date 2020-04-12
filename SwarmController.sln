@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SwarmController", "SwarmCon
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapesPoints", "ShapesPoints\ShapesPoints.vcxproj", "{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtGuiApplication1", "QtGuiApplication1\QtGuiApplication1.vcxproj", "{6AC1FF60-0871-42A5-AE0F-3DF23E24287B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,12 @@ Global
 		{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}.Release|x64.Build.0 = Release|x64
 		{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}.Release|x86.ActiveCfg = Release|Win32
 		{1B4B8C33-DCB9-4527-A3EE-5CCB28A17333}.Release|x86.Build.0 = Release|Win32
+		{6AC1FF60-0871-42A5-AE0F-3DF23E24287B}.Debug|x64.ActiveCfg = Debug|Win32
+		{6AC1FF60-0871-42A5-AE0F-3DF23E24287B}.Debug|x86.ActiveCfg = Debug|Win32
+		{6AC1FF60-0871-42A5-AE0F-3DF23E24287B}.Debug|x86.Build.0 = Debug|Win32
+		{6AC1FF60-0871-42A5-AE0F-3DF23E24287B}.Release|x64.ActiveCfg = Release|Win32
+		{6AC1FF60-0871-42A5-AE0F-3DF23E24287B}.Release|x86.ActiveCfg = Release|Win32
+		{6AC1FF60-0871-42A5-AE0F-3DF23E24287B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

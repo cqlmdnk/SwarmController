@@ -25,15 +25,33 @@ void Controller::mainSim() { // entry point of the process that is executed by t
 
 	Controller::dispatchPoints(_points);
 	
-	std::thread thread_object(&Swarm::start, std::move(swarm), swarmVector);
-	thread_object.detach();
-	Sleep(2000);
+	
 	bool reach = true;
 	
+	swarm.start(swarmVector);
 
 	while (1) {
 		//Controller::dispatchPoints(_points);
-		Sleep(2000);
+		switch (PointsVector::state)
+		{
+		case GO:
+			swarm.go(swarmVector);
+			break;
+		case LAND:
+			swarm.land(swarmVector);
+			break;
+		case HOVER:
+			swarm.hover(swarmVector);
+			break;
+		case TAKEOFF:
+			swarm.takeoff(swarmVector);
+			Sleep(3000);
+			PointsVector::state = HOVER;
+			break;
+		default:
+			break;
+		}
+		Sleep(300);
 		if (PointsVector::waypoints.size() > 0 && reach && PointsVector::state == GO) {
 			
 			Eigen::Vector3f waypoint = PointsVector::waypoints.front();

@@ -23,31 +23,7 @@ void Swarm::start(std::vector<SwarmNode*> swarmVec)
 		Vector3f c_p = PointsVector::client.getMultirotorState(name).getPosition();
 		PointsVector::nodePositions.at(id) = c_p;
 	}
-	Swarm::takeoff(swarmVec);
-	Sleep(3000);
-	while (true) {
-		switch (PointsVector::state)
-		{
-		case GO:
-			Swarm::go(swarmVec);
-			break;
-		case LAND:
-			Swarm::land(swarmVec);
-			break;
-		case HOVER:
-			Swarm::hover(swarmVec);
-			break;
-		case TAKEOFF:
-			Swarm::takeoff(swarmVec);
-			Sleep(3000);
-			PointsVector::state = HOVER;
-			break;
-		default:
-			break;
-		}
-		Sleep(300);
-
-	}
+	
 
 }
 
