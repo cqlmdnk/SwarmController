@@ -1,9 +1,9 @@
 #include "Controller.h"
-#define SIZE 20
+#define SIZE 40
 
 using namespace std;
 enum SIGNAL {DEC_Z, INC_Z, DEC_Y, INC_Y, DEC_X, INC_X, NOP};
-
+int getId(string name);
 void Controller::mainSim() { // entry point of the process that is executed by the end of Start Simulation button with unreal game
 	cout << "Press Enter to start simulation" << endl; cin.get();
 	
@@ -21,7 +21,7 @@ void Controller::mainSim() { // entry point of the process that is executed by t
 	ShapeFactory _factory = ShapeFactory();
 	auto _shape = _factory.CreateInstance(SPHE);
 
-	std::vector<Vector3f> _points = _shape->getPoints(SIZE,1000);
+	std::vector<Vector3f> _points = _shape->getPoints(SIZE,10);
 
 	Controller::dispatchPoints(_points);
 	
@@ -29,9 +29,17 @@ void Controller::mainSim() { // entry point of the process that is executed by t
 	bool reach = true;
 	
 	swarm.start(swarmVector);
-
+	swarm.takeoff(swarmVector);
+	Sleep(3000);
 	while (1) {
 		//Controller::dispatchPoints(_points);
+		for (auto node : swarmVector) {
+			Vector3f pos = PointsVector::client.getMultirotorState(node->getName()).getPosition();
+			PointsVector::nodePositions.at(getId(node->getName())) = pos;
+		}
+		swarm.go(swarmVector);
+		Sleep(500);
+		/*	
 		switch (PointsVector::state)
 		{
 		case GO:
@@ -66,7 +74,7 @@ void Controller::mainSim() { // entry point of the process that is executed by t
 			PointsVector::waypoints.pop();
 			reach = true;
 		}
-		
+		*/
 
 	}
 	
@@ -76,10 +84,14 @@ void Controller::mainSim() { // entry point of the process that is executed by t
  void Controller::dispatchPoints(std::vector<Vector3f> _points) {
 	 
 	 
-	
+	 
 
 	 PointsVector::pointsOnThreads.insert(end(PointsVector::pointsOnThreads), begin(_points), end(_points));
 	
 
  }
 
+ int getId(string name) {
+	 size_t last_index = name.find_last_not_of("0123456789");
+	 return std::stoi((name.substr(last_index + 1))) - 1;
+ }

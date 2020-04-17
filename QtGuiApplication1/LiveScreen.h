@@ -1,6 +1,7 @@
 #pragma once
 #include <qopenglwidget.h>
 #include <qopenglfunctions.h>
+#include "Controller.h"
 
 class LiveScreen : public QOpenGLWidget, public QOpenGLFunctions
 {

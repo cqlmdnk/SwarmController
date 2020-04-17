@@ -15,7 +15,7 @@ private slots:
 	void landButtonPressed();
 	void takeoffButtonPressed();
 	void moveButtonPressed();
-	void loopGL();
+	void loopSimulation();
 
 
 private:

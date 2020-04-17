@@ -98,6 +98,9 @@ bool* Collision::getAvailDirs(std::string name)
 
 Vector3f Collision::getManeVec(std::string name, Vector3f unitTargetVec, float yaw)
 {
+	//return unitTargetVec; ///!!! ---------------------------
+
+
 	bool* directions = new bool[38];
 	directions = Collision::getAvailDirs(name);
 	Matrix3f rotMatrix;

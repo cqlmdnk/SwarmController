@@ -32,22 +32,39 @@ void LiveScreen::resizeGL(int w, int h)
 
 void LiveScreen::paintGL()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.5f, 0.7f);
-	glBegin(GL_TRIANGLE_FAN); //BEGIN CIRCLE
-	double radius = 0.60;
-	int i, x, y;
+
+
+	double radius = 0.02;
+
 	double twicePi = 2.0 * 3.142;
-	x = 0, y = 0;
-	glVertex2f(x, y); // center of circle
-	for (i = 0; i <= 20; i++) {
-		glVertex2f(
-			(x + (radius * cos(i * twicePi / 20))), (y + (radius * sin(i * twicePi / 20)))
-		);
+	for (auto pos : PointsVector::nodePositions) {
+		glColor3f(0.0f, 0.5f, 0.7f);
+		glBegin(GL_TRIANGLE_FAN); //BEGIN CIRCLE
+		float x = pos.x() / 50, y = pos.y() / 50;
+		glVertex2f(x, y); // center of circle
+		for (int i = 0; i <= 10; i++) {
+			glVertex2f(
+				(x + (radius * cos(i * twicePi / 10))), (y + (radius * sin(i * twicePi / 10)))
+			);
+
+		}
+		glEnd();
 	}
 
+	
+	glBegin(GL_LINES);
+	glColor3f(0.0f, 0.0f, 1.0f);
+
+	glVertex2f(1.0f, 0.0f);
+	glVertex2f(-1.0f, 0.0f);
+	glVertex2f(0.0f, -1.0f);
+	glVertex2f(0.0f, 1.0f);
 	glEnd();
+	update();
+	
+	
+	
+	
 }
 
 

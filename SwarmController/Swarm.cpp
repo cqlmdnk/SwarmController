@@ -49,7 +49,7 @@ void Swarm::go(std::vector<SwarmNode*> &swarmVec) {
 		try { // deque empty pop exception // will be handled
 			Vector3f p = PointsVector::pointsOnThreads.at(id) + PointsVector::swarmCenter;
 			Vector3f c_p = PointsVector::client.getMultirotorState(name).getPosition();
-			PointsVector::nodePositions.at(id) = c_p;
+			
 			Vector3r targetVec = Vector3r((p.x() - c_p.x()), (p.y() - c_p.y()), (p.z() - c_p.z()));
 			float dist = sqrt(pow(targetVec.x(), 2) + pow(targetVec.y(), 2) + pow(targetVec.z(), 2));
 			Vector3r unitTargetVec = Vector3r(targetVec.x() / dist, targetVec.y() / dist, targetVec.z() / dist);
@@ -59,10 +59,9 @@ void Swarm::go(std::vector<SwarmNode*> &swarmVec) {
 			// Collision avoidance 
 			totalDist += dist;
 
-			if (dist <= 1.0f) {
-				PointsVector::client.hoverAsync(name);
+			if (dist <= 5.0f) {
 				//std::cout << "Hovering " + name << std::endl;
-
+				
 
 			}
 			else {
