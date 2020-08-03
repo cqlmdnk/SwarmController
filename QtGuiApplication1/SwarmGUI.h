@@ -2,14 +2,14 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QTimer>
-#include "ui_QtGuiApplication1.h"
+#include "ui_SwarmGUI.h"
 
-class QtGuiApplication1 : public QMainWindow
+class SwarmGUI : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	QtGuiApplication1(QWidget *parent = Q_NULLPTR);
+	SwarmGUI(QWidget *parent = Q_NULLPTR);
 private slots:
 	void hoverButtonPressed();
 	void landButtonPressed();
@@ -19,7 +19,7 @@ private slots:
 
 
 private:
-	Ui::QtGuiApplication1Class ui;
+	Ui::SwarmGUIClass ui;
 	QTimer* timer;
 	
 };

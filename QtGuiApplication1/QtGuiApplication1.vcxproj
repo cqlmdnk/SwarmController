@@ -23,6 +23,7 @@
     <Keyword>QtVS_v302</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>SwarmGUI</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -146,16 +147,16 @@
   <ItemGroup>
     <ClCompile Include="LiveScreen.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="QtGuiApplication1.cpp" />
+    <ClCompile Include="SwarmGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QtGuiApplication1.h" />
+    <QtMoc Include="SwarmGUI.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="QtGuiApplication1.ui" />
+    <QtUic Include="SwarmGUI.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="QtGuiApplication1.qrc" />
+    <QtRcc Include="SwarmGUI.qrc" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LiveScreen.h" />

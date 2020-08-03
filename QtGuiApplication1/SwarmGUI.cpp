@@ -1,6 +1,6 @@
-#include "QtGuiApplication1.h"
+#include "SwarmGUI.h"
 
-QtGuiApplication1::QtGuiApplication1(QWidget *parent)
+SwarmGUI::SwarmGUI(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
@@ -16,24 +16,24 @@ QtGuiApplication1::QtGuiApplication1(QWidget *parent)
 	_thread.detach();
 }
 
-void QtGuiApplication1::hoverButtonPressed() {
+void SwarmGUI::hoverButtonPressed() {
 	ui.listWidget->addItem("Naber");
 }
 
-void QtGuiApplication1::landButtonPressed()
+void SwarmGUI::landButtonPressed()
 {
 }
 
-void QtGuiApplication1::takeoffButtonPressed()
+void SwarmGUI::takeoffButtonPressed()
 {
 }
 
-void QtGuiApplication1::moveButtonPressed()
+void SwarmGUI::moveButtonPressed()
 {
 	auto rng = std::default_random_engine{};
 	std::shuffle(std::begin(PointsVector::pointsOnThreads), std::end(PointsVector::pointsOnThreads), rng);
 }
-void QtGuiApplication1::loopSimulation()
+void SwarmGUI::loopSimulation()
 {
 	ui.widget->update();
 	//main update of openGL widget

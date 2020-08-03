@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QtGuiApplication1Class</class>
- <widget class="QMainWindow" name="QtGuiApplication1Class">
+ <class>SwarmGUI</class>
+ <widget class="QMainWindow" name="SwarmGUI">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -104,7 +104,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="QtGuiApplication1.qrc"/>
+  <include location="SwarmGUI.qrc"/>
  </resources>
  <connections/>
 </ui>
